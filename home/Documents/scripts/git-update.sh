@@ -10,7 +10,7 @@ git pull origin main || true
 echo "📂 Gathering latest configurations from system..."
 
 # 1. Update ~/.config items
-CONFIG_ITEMS=(btop cava gtk-3.0 gtk-4.0 hypr kitty nvim nwg-look qt5ct qt6ct rofi waybar yazi)
+CONFIG_ITEMS=(btop cava gtk-3.0 gtk-4.0 hypr kitty nvim nwg-look qt5ct qt6ct rofi waybar yazi xfce4)
 for item in "${CONFIG_ITEMS[@]}"; do
     if [[ -d "$HOME/.config/$item" ]]; then
         rm -rf "$DOTFILES_DIR/config/$item"
