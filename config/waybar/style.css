@@ -1,0 +1,204 @@
+@import "colors.css";
+
+/* --- Global Reset & Fonts --- */
+* {
+    /* "Propo" fonts are better for UI (variable width) than standard Mono */
+    font-family: "CaskaydiaCove Nerd Font Propo", "FontAwesome", "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: bolder;
+    min-height: 18px;
+}
+
+window#waybar {
+    background: @base;
+    border: 0.13rem solid @highlightMed; 
+  /*  border-radius: 50px; */
+    margin: 6px;
+}
+
+/* --- Tooltips --- */
+/* Using surface_container_highest ensures the tooltip sits "above" the modules */
+tooltip {
+    background: @base;
+    border: 1.5px solid @overlay;
+    border-radius: 10px;
+}
+
+tooltip label {
+    color: @love;
+}
+
+/* --- Workspaces --- */
+#workspaces {
+    /* Low contrast container for the buttons */
+    background-color: @highlightMed;
+    margin: 5px;
+    padding: 0 2px;
+ /*   border-radius: 50px; */
+     /* border: 1.5px solid @primary; */
+    color: transparent;
+}
+
+#workspaces button {
+    padding: 0px 2px;
+    margin: 2px;
+    border-radius: 2px; 
+    /* Inactive buttons fade into the container */
+    background-color: @highlightLow;
+    color: @gold;
+    font-weight: bold;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#workspaces button.active {
+    /* Active workspace pops with your Primary color */
+    min-width: 30px;
+    background-color: @love;
+    color: @surface;
+    font-weight: 900;
+}
+
+#workspaces button:hover {
+    min-width: 30px;
+    background-color: @highlightHigh;
+    color: @love;
+}
+
+#workspaces button.urgent {
+    background-color: @love;
+    color: @love;
+}
+
+/* --- Right Modules --- */
+/* Grouping standard modules */
+#network,
+#pulseaudio,
+#wireplumber,
+#tray,
+#mode,
+#idle_inhibitor,
+#custom-power,
+#custom-notification {
+    margin: 0px 8px;
+ 
+}
+
+/* Hover effects using Primary Container for a subtle colorful glow */
+#clock:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#network:hover,
+#pulseaudio.volume:hover,
+#pulseaudio.mic:hover,
+#tray:hover,
+#idle_inhibitor:hover,
+#custom-notification:hover{
+    background-color: transparent;
+    color: @love; 
+}
+
+/* --- Specific Module Tweaks --- */
+
+#pulseaudio.volume {
+    color: @foam;
+    font-weight: bold;
+}
+#pulseaudio.mic {
+    color: @gold;
+    font-weight: bold;
+}
+
+#pulseaudio.muted {
+    color: @muted;
+    font-weight: bold;
+}
+
+#network {
+    color: @iris;
+    font-size: 9.5px;
+    font-weight: bold;
+}
+
+#clock {
+    color: @iris;
+    background: @highlightMed;
+    margin: 4px;
+    padding: 0 6px;
+    border-radius: 1px;
+    font-size: 16.5px;
+    font-weight: bolder;
+}
+
+
+/* Idle Inhibitor */
+#idle_inhibitor {
+    color: @rose;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+#idle_inhibitor.activated {
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: bolder;
+    color: @pine;
+}
+
+/* 1. Global settings for all three to ensure they match your clock */
+#cpu{
+    padding: 0px 4px;
+    margin: 0px 8px;
+    color: @rose;
+} 
+#memory{
+    color: @gold;
+} 
+#temperature {
+    color: @foam;
+}
+
+#custom-power {
+    background: @highlightMed;
+    color: @love;
+    margin: 4 4 4 4px;
+    padding: 0 5 0 12px;    
+    font-size: 14px;
+    font-weight: 800;
+}
+#custom-power:hover {
+    color: red;
+}
+
+
+
+
+
+
+/* The main dropdown menu container */
+menu {
+    background-color: rgba(25, 23, 36, 0.95); /* Base background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 0 4px;
+    margin: 4px 0;
+
+}
+
+/* Individual items in the power menu */
+menu menuitem {
+    color: #e0def4;
+    background-color: transparent;
+    border-radius: 6px;
+    padding: 4px 4px;
+    margin: 4 0 0 0px;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: bold;
+}
+
+/* Hover state for menu items */
+menu menuitem:hover {
+    background-color: rgba(235, 111, 146, 0.2); /* Soft highlight */
+    color: @love;
+}
+

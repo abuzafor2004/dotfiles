@@ -1,0 +1,168 @@
+// -*- mode: jsonc -*-
+{
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 15,
+    "margin-top": 4,
+    "margin-left": 6,
+    "margin-right": 6,
+    "margin-bottom": 0, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces",
+        "group/system"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "network",
+        "idle_inhibitor",
+        "group/pulseaudio",
+        "tray",
+        "custom/power"
+    ],
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "persistent-workspaces": {
+            "*": 5
+        }
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10,
+        // "icons": {
+        //   "blueman": "bluetooth",
+        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        // }
+    },
+    "clock": {
+        "format": "<span foreground=\"#eb6f92\">{:%I</span><span size=\"100%%\" foreground=\"#c4a7e7\">∮</span><span foreground=\"#f6c177\">%M}</span>",
+        "interval": 60,
+        "format-alt": "{:%d %B,%Y  %I:%M }",
+        "tooltip-format": "<small><tt>{calendar}</tt></small>",
+        // Shell commands go at the module root:
+        "on-click-right": "kitty -e calcurse",
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{:%U}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        // Internal Waybar calendar actions stay in "actions":
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "custom/power": {
+        "format": "⏻ ",
+        "tooltip": false,
+        "menu": "on-click",
+        "menu-file": "~/.config/waybar/scripts/power-menu.xml",
+        "menu-actions": {
+            "shutdown": "poweroff",
+            "reboot": "reboot",
+            "suspend": "systemctl suspend",
+            "lock": "systemctl hibernate",
+            "logout": "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"
+        }
+    },
+    "network": {
+      "interval": 0.5,
+      "format-wifi": "{bandwidthDownBytes:>6} \n{bandwidthUpBytes:>6} ",
+      "format-ethernet": "{bandwidthUpBytes:>6} \n{bandwidthDownBytes:>6} ",
+      "format-linked": "󰈀 No IP",
+      "format-disconnected": "󰈂 Offline",
+      "format-alt": "󰩟 {ipaddr}\n {gwaddr}",
+      "tooltip": false
+    },
+    "group/system": {
+      "orientation": "horizontal",
+      "modules": [
+        "memory",
+        "cpu",
+        "temperature"
+        ]
+    },
+    "cpu": {
+      "format": "{usage}% ",
+      "tooltip": false,
+      "on-click": "kitty -e btop"
+    },
+    "memory": {
+      "format": "{}% ",
+      "on-click": "kitty -e btop"
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": [
+          "",
+          "",
+          "",
+          ""
+        ],
+        "on-click": "kitty -e btop"
+    },
+    "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+        "activated": "󰅶",
+        "deactivated": "󰛊"
+      },
+      "timeout": 30.5
+    },
+    "group/pulseaudio": {
+      "orientation": "horizontal",
+      "modules": [
+        "pulseaudio#volume",
+        "pulseaudio#mic"
+      ]
+    },
+    "pulseaudio#volume": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon} {volume}% ",
+        "format-bluetooth": "{icon}  {volume}% ",
+        "format-bluetooth-muted": "{icon}  󰝟",
+        "format-muted": "󰝟 Muted",
+        "format-icons": {
+          "headphone": "",
+          "hands-free": "",
+          "headset": "",
+          "phone": "",
+          "portable": "",
+          "car": "",
+          "default": [
+            "",
+            "",
+            ""
+            ]
+        },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "kitty --class wiremix -e wiremix -v output"
+    },
+    "pulseaudio#mic": {
+      "format": "{format_source} Mic",
+      "format-source": "",
+      "format-source-muted": "",
+      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+      "on-click-right": "kitty --class wiremix -e wiremix -v input"
+    }
+}
