@@ -48,7 +48,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("wl-paste --type text --watch cliphist store")
 	hl.exec_cmd("wl-paste --type image --watch cliphist store")
 	
-  hl.exec_cmd("ab-download-manger  --background")
+  hl.exec_cmd("/usr/bin/ABDownloadManager --background")
 end)
 
 --------------------------------
@@ -233,6 +233,9 @@ hl.bind(
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(launcher))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
+
+hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("systemctl suspend"))
+hl.bind(mainMod .. " + SHIFT + Escape", hl.dsp.exec_cmd("poweroff"))
 
 -- Clipboard history (requires cliphist + rofi)
 hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("cliphist list | rofi -dmenu | cliphist decode | wl-copy"))
