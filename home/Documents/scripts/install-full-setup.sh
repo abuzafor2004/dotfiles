@@ -137,4 +137,15 @@ for svc in "${services[@]}"; do
     fi
 done
 
-success "Setup completed successfully! Please reboot your system."
+success "Setup completed successfully!"
+
+# --- Reboot Prompt (Default: Yes) ---
+echo -e "${BLUE}[PROMPT]${NC}"
+read -p "Would you like to reboot now? [Y/n] " -n 1 -r
+echo
+if [[ -z "$REPLY" || "$REPLY" =~ ^[Yy]$ ]]; then
+    info "Initiating system reboot..."
+    sudo reboot
+else
+    info "Reboot skipped. Please remember to restart your computer later for all services and drivers to take effect."
+fi
