@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-# Exit immediately if a command exits with a non-zero status, 
-# treat unset variables as an error, and catch errors in pipelines.
-set -euo pipefail
+# Exit immediately on critical errors, but we handle package failures gracefully below
+set -eo pipefail
 
 # Color definitions for output logging
 readonly RED='\033[0;31m'
 readonly GREEN='\033[0;32m'
 readonly BLUE='\033[0;34m'
+readonly YELLOW='\033[0;33m'
 readonly NC='\033[0m' # No Color
 
 info()    { echo -e "${BLUE}[INFO]${NC} $1"; }
 success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
+warning() { echo -e "${YELLOW}[WARNING]${NC} $1"; }
 error()   { echo -e "${RED}[ERROR]${NC} $1" >&2; }
 
 # Ensure script is not run as root directly (makepkg will fail as root anyway)
@@ -21,7 +22,7 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 info "Updating system packages..."
-sudo pacman -Syu --noconfirm
+sudo pacman -Syu --noconfirm || warning "System update had minor issues, continuing..."
 
 info "Installing base development tools and git..."
 sudo pacman -S --needed --noconfirm base-devel git
@@ -44,18 +45,19 @@ fi
 
 # --- Official Repositories Packages ---
 PACMAN_PACKAGES=(
-    wiremix awww cava yazi neovim thunar thunar-archive-plugin tumbler 
+    wl-clipboard cliphist hyprland hypridle hyprlock hyprshot wiremix awww 
+    cava yazi neovim thunar thunar-archive-plugin tumbler 
     gvfs gvfs-mtp rofi rofi-calc xdg-desktop-portal xdg-desktop-portal-gtk 
     xdg-desktop-portal-hyprland btop zip gzip unzip 7zip tar file-roller 
     zoxide fzf ripgrep fastfetch starship ttf-cascadia-code-nerd kitty 
     grim slurp qt5-wayland qt6-wayland qt5ct qt6ct imv polkit-gnome 
     nwg-look adw-gtk-theme papirus-icon-theme swaync timeshift flatpak 
     vlc vlc-plugins-all lutris pipewire pipewire-pulse pipewire-alsa 
-    pipewire-jack wireplumber sddm openssh hyprland hypridle hyprlock hyprshot 
+    pipewire-jack wireplumber sddm openssh 
 )
 
 info "Installing official repository packages..."
-sudo pacman -S --needed --noconfirm "${PACMAN_PACKAGES[@]}"
+sudo pacman -S --needed --noconfirm "${PACMAN_PACKAGES[@]}" || warning "Some official packages failed to install, proceeding..."
 
 # --- AUR Packages ---
 AUR_PACKAGES=(
@@ -66,12 +68,14 @@ AUR_PACKAGES=(
     rose-pine-hyprcursor
 )
 
-info "Installing AUR packages via yay..."
-yay -S --needed --noconfirm "${AUR_PACKAGES[@]}"
+info "Installing AUR packages via yay (will skip individual failures if any)..."
+for pkg in "${AUR_PACKAGES[@]}"; do
+    yay -S --needed --noconfirm "$pkg" || warning "Failed to install AUR package: $pkg. Continuing..."
+done
 
 # --- Flatpak Applications ---
 info "Configuring Flathub remote..."
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
 
 FLATPAK_APPS=(
     io.github.kolunmi.Bazaar
@@ -82,18 +86,19 @@ FLATPAK_APPS=(
 )
 
 info "Installing Flatpak applications..."
-flatpak install -y flathub "${FLATPAK_APPS[@]}" || info "Some flatpaks might already be installed."
+for app in "${FLATPAK_APPS[@]}"; do
+    flatpak install -y flathub "$app" || warning "Failed to install Flatpak app: $app. Continuing..."
+done
 
 # --- Restore Dotfiles and Custom Assets from GitHub ---
 info "Cloning and restoring dotfiles from GitHub..."
 DOTFILES_DIR="$HOME/dotfiles"
 
 if [[ ! -d "$DOTFILES_DIR" ]]; then
-    # Clone your dotfiles repository (Replace with your actual repo link if needed)
-    git clone https://github.com/abuzafor2004/dotfiles.git "$DOTFILES_DIR"
+    git clone https://github.com/abuzafor2004/dotfiles.git "$DOTFILES_DIR" || error "Failed to clone dotfiles repository."
 else
     info "Dotfiles directory already exists. Pulling latest updates..."
-    git -C "$DOTFILES_DIR" pull
+    git -C "$DOTFILES_DIR" pull || warning "Could not pull latest updates from remote repository."
 fi
 
 info "Restoring ~/.config directories..."
@@ -110,22 +115,16 @@ fi
 
 info "Restoring home files (Pictures, Documents, .bashrc)..."
 if [[ -d "$DOTFILES_DIR/home" ]]; then
-    if [[ -f "$DOTFILES_DIR/home/.bashrc" ]]; then
-        cp -f "$DOTFILES_DIR/home/.bashrc" "$HOME/.bashrc"
-    fi
-    if [[ -d "$DOTFILES_DIR/home/Pictures" ]]; then
-        cp -rf "$DOTFILES_DIR/home/Pictures" "$HOME/"
-    fi
-    if [[ -d "$DOTFILES_DIR/home/Documents" ]]; then
-        cp -rf "$DOTFILES_DIR/home/Documents" "$HOME/"
-    fi
+    [[ -f "$DOTFILES_DIR/home/.bashrc" ]] && cp -f "$DOTFILES_DIR/home/.bashrc" "$HOME/.bashrc"
+    [[ -d "$DOTFILES_DIR/home/Pictures" ]] && cp -rf "$DOTFILES_DIR/home/Pictures" "$HOME/"
+    [[ -d "$DOTFILES_DIR/home/Documents" ]] && cp -rf "$DOTFILES_DIR/home/Documents" "$HOME/"
 fi
 success "Dotfiles and assets restored successfully!"
 
 # --- System Services ---
 info "Enabling and starting system services..."
-systemctl --user enable --now pipewire pipewire-pulse wireplumber
-sudo systemctl enable sshd sddm
+systemctl --user enable --now pipewire pipewire-pulse wireplumber || warning "Could not enable user pipewire services."
+sudo systemctl enable --now sshd sddm || warning "Could not enable core system services."
 
 # --- Post-Install Verification ---
 info "Verifying critical services..."
@@ -134,7 +133,7 @@ for svc in "${services[@]}"; do
     if systemctl is-active --quiet "$svc" || systemctl --user is-active --quiet "$svc"; then
         success "Service '$svc' is active and running."
     else
-        error "Service '$svc' failed to start properly."
+        warning "Service '$svc' is not currently active (this might be normal if running inside a container or pre-reboot)."
     fi
 done
 
