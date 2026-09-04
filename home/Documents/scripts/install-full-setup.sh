@@ -62,7 +62,6 @@ AUR_PACKAGES=(
     helium-browser-bin
     waybar-git
     ab-download-manager-bin
-    pamac-all
     rose-pine-cursor
     rose-pine-hyprcursor
 )
