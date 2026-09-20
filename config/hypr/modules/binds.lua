@@ -42,6 +42,7 @@ hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("cliphist list | rofi -dmenu 
 
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("$HOME/.config/waybar/scripts/waybar-reload.sh"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("$HOME/.local/share/bin/wall-change.sh"))
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("$HOME/.local/share/bin/wallselect.sh"))
 
 -- Focus: vim-style
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))

@@ -15,4 +15,8 @@ o.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for.
 o.encoding = "UTF-8" -- Sets the character encoding used inside Vim.
 o.ruler = true -- Show the line and column number of the cursor position, separated by a comma.
 
-
+vim.filetype.add({
+  extension = {
+    qml = "qmljs",
+  },
+})
