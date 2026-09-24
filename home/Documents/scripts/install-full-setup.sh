@@ -53,7 +53,8 @@ PACMAN_PACKAGES=(
     grim slurp qt5-wayland qt6-wayland qt5ct qt6ct imv polkit-gnome 
     nwg-look adw-gtk-theme papirus-icon-theme swaync timeshift flatpak 
     vlc vlc-plugins-all lutris pipewire pipewire-pulse pipewire-alsa 
-    pipewire-jack wireplumber sddm openssh 
+    pipewire-jack wireplumber sddm openssh zathura zathura-pdf-mupdf xdotool
+    texlive-bin texlive-basic
 )
 
 info "Installing official repository packages..."

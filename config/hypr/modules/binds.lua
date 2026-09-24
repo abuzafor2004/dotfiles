@@ -33,6 +33,7 @@ hl.bind(
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(launcher))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("helium-browser --incognito"))
 
 hl.bind(mainMod .. " + Delete", hl.dsp.exec_cmd("systemctl suspend"))
 hl.bind(mainMod .. " + SHIFT + Delete", hl.dsp.exec_cmd("poweroff"))
