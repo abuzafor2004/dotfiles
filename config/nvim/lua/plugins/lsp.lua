@@ -18,6 +18,7 @@ return {
         "rust_analyzer",
         "cssls",
         "html",
+        "texlab",
       },
       automatic_installation = true,
     })
@@ -54,6 +55,7 @@ return {
       "cssls",
       "html",
       "qmlls",
+      "texlab",
     }
 
     for _, server in ipairs(servers) do
