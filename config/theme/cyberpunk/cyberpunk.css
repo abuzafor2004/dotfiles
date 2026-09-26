@@ -1,0 +1,22 @@
+/*
+* Variant: Cyberpunk
+*/
+
+@define-color background rgba(9, 0, 20, 1.0);
+@define-color surface         #180a2b;
+@define-color overlay         #26114a;
+
+@define-color muted           #4c3272;
+@define-color subtle          #744b9e;
+@define-color text            #c2cce6;
+
+@define-color love            #ff007f;
+@define-color gold            #e5ff00;
+@define-color rose            #ff5e00;
+@define-color pine            #00ff41;
+@define-color foam            #00ffff;
+@define-color iris            #bc13fe;
+
+@define-color highlightLow    #26114a;
+@define-color highlightMed    #4c3272;
+@define-color highlightHigh   #744b9e;

@@ -1,0 +1,22 @@
+/*
+* Variant: Monochrome
+*/
+
+@define-color background rgba(21, 21, 21, 1.0);
+@define-color surface         #1e1e1e;
+@define-color overlay         #2a2a2a;
+
+@define-color muted           #4d4d4d;
+@define-color subtle          #888888;
+@define-color text            #e5e5e5;
+
+@define-color love            #666666;
+@define-color gold            #888888;
+@define-color rose            #999999;
+@define-color pine            #aaaaaa;
+@define-color foam            #cccccc;
+@define-color iris            #dddddd;
+
+@define-color highlightLow    #2a2a2a;
+@define-color highlightMed    #333333;
+@define-color highlightHigh   #4d4d4d;

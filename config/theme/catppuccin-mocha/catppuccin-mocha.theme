@@ -1,0 +1,107 @@
+# Main background, empty for terminal default, need to be empty if you want transparent background
+theme[main_bg]="#1e1e2e"
+# Base
+
+# Main text color
+theme[main_fg]="#cdd6f4"
+# Text
+
+# Title color for boxes
+theme[title]="#a6adc8"
+# Subtext0
+
+# Highlight color for keyboard shortcuts
+theme[hi_fg]="#89b4fa"
+# Blue
+
+# Background color of selected item in processes box
+theme[selected_bg]="#45475a"
+# Surface1
+
+# Foreground color of selected item in processes box
+theme[selected_fg]="#f9e2af"
+# Yellow
+
+# Color of inactive/disabled text
+theme[inactive_fg]="#585b70"
+# Surface2
+
+# Color of text appearing on top of graphs, i.e uptime and current network graph scaling
+theme[graph_text]="#f5e0dc"
+# Rosewater
+
+# Background color of the percentage meters
+theme[meter_bg]="#313244"
+# Surface0
+
+# Misc colors for processes box including mini cpu graphs, details memory graph and details status text
+theme[proc_misc]="#cba6f7"
+# Mauve
+
+# Cpu box outline color
+theme[cpu_box]="#cba6f7"
+# Mauve
+
+# Memory/disks box outline color
+theme[mem_box]="#a6e3a1"
+# Green
+
+# Net up/down box outline color
+theme[net_box]="#f5c2e7"
+# Pink
+
+# Processes box outline color
+theme[proc_box]="#89b4fa"
+# Blue
+
+# Box divider line and small boxes line color
+theme[div_line]="#6c7086"
+# Overlay0
+
+# Temperature graph colors
+theme[temp_start]="#a6e3a1"
+# Green
+theme[temp_mid]="#f9e2af"
+# Yellow
+theme[temp_end]="#f38ba8"
+# Red
+
+# CPU graph colors
+theme[cpu_start]="#a6e3a1"
+theme[cpu_mid]="#f9e2af"
+theme[cpu_end]="#f38ba8"
+
+# Mem/Disk free meter
+theme[free_start]="#a6e3a1"
+theme[free_mid]="#a6e3a1"
+theme[free_end]="#a6e3a1"
+
+# Mem/Disk cached meter
+theme[cached_start]="#89b4fa"
+theme[cached_mid]="#89b4fa"
+theme[cached_end]="#89b4fa"
+
+# Mem/Disk available meter
+theme[available_start]="#f5c2e7"
+theme[available_mid]="#f5c2e7"
+theme[available_end]="#f5c2e7"
+
+# Mem/Disk used meter
+theme[used_start]="#f38ba8"
+theme[used_mid]="#f38ba8"
+theme[used_end]="#f38ba8"
+
+# Download graph colors
+theme[download_start]="#a6e3a1"
+theme[download_mid]="#94e2d5"
+theme[download_end]="#89dceb"
+
+# Upload graph colors
+theme[upload_start]="#f38ba8"
+theme[upload_mid]="#eba0ac"
+theme[upload_end]="#fab387"
+
+# Process box color gradient for threads, mem and cpu usage
+theme[process_start]="#89b4fa"
+theme[process_mid]="#74c7ec"
+theme[process_end]="#89dceb"

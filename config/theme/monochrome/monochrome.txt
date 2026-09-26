@@ -1,0 +1,10 @@
+# In the [color] section
+background = '#151515'
+gradient = 1
+gradient_count = 6
+gradient_color_1 = '#4d4d4d'
+gradient_color_2 = '#666666'
+gradient_color_3 = '#888888'
+gradient_color_4 = '#aaaaaa'
+gradient_color_5 = '#cccccc'
+gradient_color_6 = '#ffffff'

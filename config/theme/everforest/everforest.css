@@ -1,0 +1,22 @@
+/*
+* Variant: Everforest
+*/
+
+@define-color background rgba(45, 53, 59, 1.0);
+@define-color surface         #343f44;
+@define-color overlay         #3d484d;
+
+@define-color muted           #859289;
+@define-color subtle          #9da9a0;
+@define-color text            #d3c6aa;
+
+@define-color love            #e67e80;
+@define-color gold            #dbbc7f;
+@define-color rose            #e69875;
+@define-color pine            #a7c080;
+@define-color foam            #83c092;
+@define-color iris            #d699b6;
+
+@define-color highlightLow    #3d484d;
+@define-color highlightMed    #475258;
+@define-color highlightHigh   #5c6a72;

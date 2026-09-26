@@ -1,0 +1,22 @@
+/*
+* Variant: Gruvbox Dark
+*/
+
+@define-color background rgba(40, 40, 40, 1.0);
+@define-color surface         #3c3836;
+@define-color overlay         #504945;
+
+@define-color muted           #928374;
+@define-color subtle          #a89984;
+@define-color text            #ebdbb2;
+
+@define-color love            #fb4934;
+@define-color gold            #fabd2f;
+@define-color rose            #fe8019;
+@define-color pine            #b8bb26;
+@define-color foam            #8ec07c;
+@define-color iris            #d3869b;
+
+@define-color highlightLow    #3c3836;
+@define-color highlightMed    #504945;
+@define-color highlightHigh   #665c54;

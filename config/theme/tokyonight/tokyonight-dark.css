@@ -1,0 +1,22 @@
+/*
+* Variant: Tokyonight Dark
+*/
+
+@define-color background rgba(26, 27, 38, 1.0);
+@define-color surface         #24283b;
+@define-color overlay         #292e42;
+
+@define-color muted           #565f89;
+@define-color subtle          #a9b1d6;
+@define-color text            #c0caf5;
+
+@define-color love            #f7768e;
+@define-color gold            #e0af68;
+@define-color rose            #ff9e64;
+@define-color pine            #9ece6a;
+@define-color foam            #7dcfff;
+@define-color iris            #bb9af7;
+
+@define-color highlightLow    #292e42;
+@define-color highlightMed    #414868;
+@define-color highlightHigh   #565f89;

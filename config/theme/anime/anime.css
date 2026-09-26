@@ -1,0 +1,22 @@
+/*
+* Variant: Anime
+*/
+
+@define-color background rgba(26, 24, 41, 1.0);
+@define-color surface         #312c47;
+@define-color overlay         #242036;
+
+@define-color muted           #5b537a;
+@define-color subtle          #a49cb5;
+@define-color text            #e4dcf4;
+
+@define-color love            #ff8da1;
+@define-color gold            #f6d288;
+@define-color rose            #ffb4c8;
+@define-color pine            #a1eebb;
+@define-color foam            #94e7e6;
+@define-color iris            #e4a3fa;
+
+@define-color highlightLow    #242036;
+@define-color highlightMed    #42385c;
+@define-color highlightHigh   #5b537a;
